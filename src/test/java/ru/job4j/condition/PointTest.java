@@ -3,6 +3,9 @@ package ru.job4j.condition;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
+
 public class PointTest {
 
     @Test
@@ -48,5 +51,23 @@ public class PointTest {
         Point second = new Point(3, -4);
         double out = first.distance(second);
         Assert.assertEquals(expected, out, 0.01);
+    }
+
+    @Test
+    public void when000to222Then3dot46() {
+        double expected = 3.46;
+        Point x = new Point(0, 0, 0);
+        Point y = new Point(2, 2, 2);
+        double result = x.distance3d(y);
+        assertThat(result).isCloseTo(expected, offset(0.01));
+    }
+
+    @Test
+    public void when123to321Then2dot82() {
+        double expected = 2.82;
+        Point x = new Point(1, 2, 3);
+        Point y = new Point(3, 2, 1);
+        double result = x.distance3d(y);
+        assertThat(result).isCloseTo(expected, offset(0.01));
     }
 }
